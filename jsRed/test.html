@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.21/lodash.js"></script>
+    <script>
+       const obj1 = [{ name:'1' , age : 18},{ name:'2' , age : 30},{ name:'3' , age : 17},{ name:'4' , age : 18},{ name:'5' , age : 17},{ name:'6' , age : 18},]
+       const list = [  { age:18, message : '成年'} , { age:30, message : '结婚'}, { age:18, message : '你刚成年'} , { age:18, message : '成年快乐'} ,] 
+       const l = []
+       obj1.map( ob => {
+            let i =0;
+            list.forEach( el => {
+                if ( el.age === ob.age ){
+                    i+=1;
+                    if ( i === 1){
+                        ob.message = el.message
+                    }else{
+
+
+                        // 1  正常实现
+                        const it = JSON.stringify(ob)
+                        const item = JSON.parse(JSON.stringify(ob))
+
+
+                        // 2  存在地址引用问题
+                        // const item = ob;
+
+
+                        item.message = el.message
+                        l.push(item);
+                    }
+                    
+                }
+            })
+
+        return ob;
+       })
+       const arr = obj1.concat(l)
+        const arr1 = _.sortBy(arr, [ 'name' , 'age' ])
+       console.log(arr1);
+</script>
+</body>
+
+</html>
